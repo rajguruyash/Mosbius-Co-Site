@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mosbius &amp; Co — your coding story starts here</title>
+<meta name="description" content="Mosbius &amp; Co is a desktop app that runs the coding agents already on your machine as a crew, in a pixel-art office. Free and open source. Version 1.1.0, the Huddle release, is for macOS on Apple silicon and Windows.">
+<meta property="og:title" content="Mosbius &amp; Co">
+<meta property="og:description" content="Run the coding agents already on your machine as a crew, in one pixel-art office.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="visually-hidden" href="#team">Skip to the content</a>
+
+<nav class="nav">
+  <div class="shell">
+    <a class="brand" href="#top">
+      <img class="mark" src="assets/mark.png" alt="" width="28" height="28">
+      Mosbius &amp; Co
+    </a>
+    <div class="nav-links">
+      <a class="nav-more nav-wide" href="#team">The crew</a>
+      <a class="nav-more nav-wide" href="#places">Locations</a>
+      <a class="nav-more nav-xwide" href="#huddle">Huddle</a>
+      <a class="nav-more" href="#agents">Agents</a>
+      <a class="nav-more" href="#plug">Integrations</a>
+      <a class="nav-more nav-mid" href="#skills">Skills</a>
+      <a class="nav-more nav-mid" href="#security">Security</a>
+      <a href="releases.html">Releases</a>
+      <a href="#download">Download</a>
+      <a class="nav-more" href="https://github.com/rajguruyash/Mosbius-Co">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ───────────────────────── hero ───────────────────────── -->
+<header class="hero" id="top">
+  <div class="shell hero-copy">
+    <span class="eyebrow">FAN-MADE · FREE · OPEN SOURCE</span>
+    <h1>Your coding story starts here.</h1>
+    <p class="lede">
+      Mosbius &amp; Co runs the coding agents already installed on your machine as a
+      crew, across <!--gen:locations-word-->seven<!--/gen--> rooms you can switch between. Free and open source.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://github.com/rajguruyash/Mosbius-Co/releases/tag/v1.1.0">Download for macOS</a>
+      <a class="btn btn-primary" href="https://github.com/rajguruyash/Mosbius-Co/releases/tag/v1.1.0.0">Download for Windows</a>
+      <a class="btn btn-ghost" href="https://github.com/rajguruyash/Mosbius-Co">View on GitHub</a>
+    </div>
+    <p class="hero-note">
+      Works with Claude Code, OpenAI Codex and Google Gemini CLI. You only need one.
+    </p>
+    <p class="hero-note">
+      New in 1.1.0: <a href="#huddle">the Huddle</a>, a small window that keeps every agent within reach. For macOS on Apple silicon and Windows.
+    </p>
+  </div>
+
+  <div class="stage" id="hero-stage">
+    <canvas id="hero-canvas" role="img"
+            aria-label="Pixel-art scene: the crew outside MacLaren's Pub, talking, while a cab passes."></canvas>
+    <div class="bubbles" id="hero-bubbles" aria-live="polite"></div>
+  </div>
+  <div class="shell">
+    <p class="scene-caption"><b>TRY IT:</b> click anyone down there. They will tell you what they do.</p>
+  </div>
+</header>
+
+<!-- ───────────────────────── meet the team ───────────────────────── -->
+<section class="band-light horn-mark left" id="team">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>MEET THE TEAM</span>
+      <h2>One office.<br><!--gen:locations-word-cap-->Seven<!--/gen--> legendary locations.</h2>
+      <p>
+        Every agent gets its own terminal, a character to match, a room and a job.
+        Meet the crew.
+      </p>
+    </div>
+    <div class="team" id="team-cards"></div>
+  </div>
+</section>
+
+<!-- ───────────────────────── agent spawning ───────────────────────── -->
+<section class="band-deep horn-mark" id="spawn">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>THE DEMONSTRATION</span>
+      <h2>Watch your coding team<br>come to life.</h2>
+      <p>
+        A task arrives, Ted hands it out, and the agents that take it walk to a
+        desk and start working. This is how the desktop app brings a crew to life.
+      </p>
+    </div>
+
+    <div class="demo">
+      <div>
+        <div class="stage room-frame" id="spawn-stage">
+          <canvas id="spawn-canvas" role="img"
+                  aria-label="Pixel-art office: agents spawn, walk to desks and begin working."></canvas>
+          <div class="bubbles" id="spawn-bubbles" aria-live="polite"></div>
+        </div>
+        <div class="demo-controls">
+          <button class="btn btn-primary" id="spawn-replay" type="button">Run it again</button>
+          <span class="panel-foot" id="spawn-state" style="color:#b9c0d2"></span>
+        </div>
+      </div>
+
+      <div style="display:grid; gap:14px">
+        <div class="panel">
+          <div class="panel-head"><span class="led"></span>COMMAND CENTRE</div>
+          <div class="panel-body">
+            <ol class="steps" id="spawn-steps"></ol>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="led"></span>TERMINAL</div>
+          <div class="term" id="spawn-term"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── locations ───────────────────────── -->
+<section class="horn-mark left" id="places">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span><!--gen:locations-word-upper-->SEVEN<!--/gen--> LOCATIONS</span>
+      <h2>Every room is a workspace.</h2>
+      <p>
+        Rooftop parties, the booth at MacLaren's, the boardroom at GNB. Every room from the
+        show is its own workspace with its own boss and crew. Pick one and see who is in.
+      </p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Locations" id="room-tabs"></div>
+
+    <div class="stage room-frame" id="room-stage">
+      <canvas id="room-canvas" role="img" aria-label="Pixel-art room with characters moving around in it."></canvas>
+      <div class="bubbles" id="room-bubbles" aria-live="polite"></div>
+    </div>
+    <div class="room-note">
+      <h3 id="room-title">Ted's Place</h3>
+      <p id="room-blurb"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── cinema ───────────────────────── -->
+<section class="band-deep horn-mark" id="cinema">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>SHORT REELS</span>
+      <h2>Pixel-art, start to finish.</h2>
+      <p>
+        Little stories from the office, drawn with the same sprites and rooms as the app.
+      </p>
+    </div>
+
+    <div class="reels" role="tablist" aria-label="Reels" id="reel-tabs"></div>
+
+    <div class="stage room-frame" id="reel-stage">
+      <canvas id="reel-canvas" role="img" aria-label="Looping pixel-art sequence."></canvas>
+      <div class="bubbles" id="reel-bubbles" aria-live="polite"></div>
+    </div>
+    <div class="progress"><span id="reel-progress"></span></div>
+    <p class="reel-note" id="reel-note"></p>
+  </div>
+</section>
+
+<!-- ───────────────────────── features ───────────────────────── -->
+<section class="horn-mark" id="features">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>WHAT IT DOES</span>
+      <h2>Your agents, one office.</h2>
+      <p>Mosbius &amp; Co brings the coding agents you already use together, and gives you control over what they can reach.</p>
+    </div>
+    <div class="features">
+      <div class="feature"><h3>Finds your agents</h3><p>Claude Code, Codex and Gemini CLI are detected on your machine and keep the sign-in you already have.</p></div>
+      <div class="feature"><h3>A terminal per agent</h3><p>Each agent has its own terminal, folder and history. Switch rooms whenever you like; your sessions keep running.</p></div>
+      <div class="feature"><h3>Agent manager</h3><p>Hire, name and place agents, see what each is doing, and stop any of them from one window.</p></div>
+      <div class="feature"><h3>Tools and services</h3><p>Run local tools on your computer or connect services like GitHub, Notion and Slack. Everything is off until you switch it on.</p></div>
+      <div class="feature"><h3>Your own APIs</h3><p>Connect any REST API with its own key. The key stays encrypted and is never handed to the agent.</p></div>
+      <div class="feature"><h3>Skills</h3><p>Browse a catalogue of skills, see where each comes from, install what you want and roll back any update.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── agent huddle ───────────────────────── -->
+<section class="band-deep horn-mark" id="huddle">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>AGENT HUDDLE</span>
+      <h2>Meet the Huddle.</h2>
+    </div>
+
+    <figure class="huddle-desktop">
+      <div class="video-frame">
+        <video data-huddle-video muted loop playsinline controls preload="none"
+               poster="assets/huddle/huddle-desktop-poster.jpg" width="1920" height="1200"
+               aria-label="The whole app is open with agents at work in Barney's apartment. The pointer goes to Huddle and clicks it, the app minimises, and the Huddle comes up in the top right corner of the empty desktop. The view moves in on it: every agent at work, requests arriving, then the Huddle opened out to approve one and answer another, to read its notifications, to read an agent's conversation and its terminal, and to type a message to another agent and see its reply.">
+          <source src="assets/huddle/huddle-desktop.mp4" type="video/mp4">
+          <a href="assets/huddle/huddle-desktop.mp4">Watch the video</a>
+        </video>
+      </div>
+    </figure>
+
+    <div class="features huddle-points">
+      <div class="feature"><h3>Your Agents, Always Within Reach</h3><p>Huddle Mode</p></div>
+      <div class="feature"><h3>Step In Only When It Matters</h3><p>Intelligent Notifications</p></div>
+      <div class="feature"><h3>Unified Agent Control</h3><p>Switch between agents, inspect conversations, access terminals, send instructions, and manage tasks from a single compact interface. Your entire AI team stays coordinated and accessible from anywhere on your desktop.</p></div>
+    </div>
+
+    <div class="huddle-gallery">
+      <figure class="huddle-video">
+        <div class="video-frame">
+          <video data-huddle-video muted loop playsinline controls preload="none"
+                 poster="assets/huddle/huddle-story-poster.jpg" width="432" height="580"
+                 aria-label="The Huddle at work: a request to run a command is approved and a question is answered, both from the Huddle, and an agent finishes its task.">
+            <source src="assets/huddle/huddle-story.mp4" type="video/mp4">
+            <a href="assets/huddle/huddle-story.mp4">Watch the video</a>
+          </video>
+        </div>
+      </figure>
+      <figure class="shot huddle-shot">
+        <a class="shot-link" href="assets/huddle/huddle-compact.png">
+          <img src="assets/huddle/huddle-compact.png" width="624" height="740" loading="lazy" decoding="async"
+               alt="The compact Huddle, a small window listing every agent as a pixel character. One is waiting for approval to run a command, one is searching the code and two are idle. A badge on the bell counts what is waiting.">
+        </a>
+      </figure>
+      <figure class="shot huddle-shot">
+        <a class="shot-link" href="assets/huddle/huddle-expanded.png">
+          <img src="assets/huddle/huddle-expanded.png" width="864" height="1160" loading="lazy" decoding="async"
+               alt="The expanded Huddle. Under the heading Needs you is an approval card for a command, with the buttons Approve, Reject and Suggest instead. Below it is every agent, with what it is doing and a progress bar.">
+        </a>
+      </figure>
+      <figure class="shot huddle-shot">
+        <a class="shot-link" href="assets/huddle/huddle-agent.png">
+          <img src="assets/huddle/huddle-agent.png" width="1040" height="1320" loading="lazy" decoding="async"
+               alt="One agent's view in the Huddle: its state, buttons to pause, stop, restart or end it, the approval it is waiting on, tabs for its conversation and terminal, and a box to message it.">
+        </a>
+      </figure>
+    </div>
+
+    <p class="fine">New in v1.1.0, for macOS on Apple silicon and Windows.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────── agents ───────────────────────── -->
+<section class="band-light horn-mark left" id="agents">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>THE AGENTS</span>
+      <h2>Bring the agents<br>you already use.</h2>
+      <p>Mosbius &amp; Co does not ship a model. It runs the coding agents on your machine, side by side.</p>
+    </div>
+    <div class="agent-grid">
+      <article class="agent-card"><div class="agent-card-head"><h3>Claude Code</h3><span class="agent-ver">Anthropic</span></div>
+        <p class="agent-summary">Add Claude Code agents to any room. Each works in its own terminal, keeps the sign-in you already have, and can use the tools and skills you give it.</p></article>
+      <article class="agent-card"><div class="agent-card-head"><h3>OpenAI Codex</h3><span class="agent-ver">OpenAI</span></div>
+        <p class="agent-summary">Add OpenAI Codex agents to any room. Each works in its own terminal, keeps the sign-in you already have, and can use the tools and skills you give it.</p></article>
+      <article class="agent-card"><div class="agent-card-head"><h3>Google Gemini CLI</h3><span class="agent-ver">Google</span></div>
+        <p class="agent-summary">Add Google Gemini CLI agents to any room. Each works in its own terminal, keeps the sign-in you already have, and can use the tools and skills you give it.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── Plug in an integration ───────────────────────── -->
+<section class="horn-mark" id="plug">
+  <div class="shell">
+
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>INTEGRATIONS</span>
+      <h2>Plug in your tools.</h2>
+      <p>
+        GitHub, Notion, Slack, Google Workspace and more, grouped by what they are for. Everything starts
+        switched off: turn on what you want, then choose which agent may use it.
+      </p>
+    </div>
+
+    <div class="plug-grid">
+      <div>
+        <div class="filters" role="group" aria-label="Which group of integrations" id="filters"></div>
+
+        <div class="card-groups" id="cards"></div>
+      </div>
+
+      <aside class="agent-panel" aria-label="What one agent can reach">
+        <div class="agent-head">
+          <canvas id="plug-portrait" width="40" height="62" aria-hidden="true"></canvas>
+          <div>
+            <div class="agent-name">TED</div>
+            <div class="agent-role">Architect · Claude Code</div>
+          </div>
+          <span class="agent-status">READY</span>
+        </div>
+
+        <div class="panel-label">
+          <span>CAN REACH</span>
+          <span id="slot-count"></span>
+        </div>
+        <ul class="slots" id="slots"></ul>
+
+        <p class="panel-note">
+          Switch a service on, connect it, and give Ted access. Only then can he use it.
+        </p>
+        <p class="panel-foot">
+          Credentials are stored encrypted by your operating system and are never shown to an agent.
+        </p>
+      </aside>
+    </div>
+
+  </div>
+</section>
+
+<!-- ───────────────────────── skills ───────────────────────── -->
+<section class="band-light horn-mark left" id="skills">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>SKILLS</span>
+      <h2>Teach your agents new tricks.</h2>
+      <p>A skill is a folder of instructions an agent can load. Browse a catalogue, install what you like, and stay in control of every change.</p>
+    </div>
+    <div class="features">
+      <div class="feature"><h3>Discover and install</h3><p>Browse a community catalogue and install a skill for the agent you choose, with one click.</p></div>
+      <div class="feature"><h3>Safe by default</h3><p>Installing a skill never connects a service and never grants permission. Anything that could switch something on is left out.</p></div>
+      <div class="feature"><h3>Know where it came from</h3><p>Every skill keeps its source and exact version, and you can check at any time that it is unchanged.</p></div>
+      <div class="feature"><h3>Update with a preview</h3><p>See every changed line before an update is applied, and roll back if you do not like it.</p></div>
+      <div class="feature"><h3>Claude, Codex and Gemini</h3><p>Install the same skill for Claude Code or for Codex and Gemini CLI, and keep them separate.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── security ───────────────────────── -->
+<section class="band-deep horn-mark" id="security">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>SECURITY AND PERMISSIONS</span>
+      <h2>You decide who can reach what.</h2>
+      <p>Agents start with no access. You switch things on, connect them, and choose exactly what each agent may do.</p>
+    </div>
+    <div class="features">
+      <div class="feature"><h3>You are in control</h3><p>Nothing is connected until you connect it, and nothing is reachable until you switch it on.</p></div>
+      <div class="feature"><h3>Per-agent permissions</h3><p>Give each agent only the services it needs, and none by default.</p></div>
+      <div class="feature"><h3>Read and write controls</h3><p>Choose read, write or a hand-picked list of tools. Sending, posting and deleting are always ticked by hand.</p></div>
+      <div class="feature"><h3>Careful with credentials</h3><p>Keys and sign-ins are stored encrypted by your operating system and are not handed to the agent.</p></div>
+      <div class="feature"><h3>Revoke any time</h3><p>Take access away and it applies at once. The Activity tab shows what was done.</p></div>
+      <div class="feature"><h3>Local first</h3><p>Your workspace stays on your machine. There is no Mosbius &amp; Co account.</p></div>
+    </div>
+    <p class="fine">More detail in the <a href="https://github.com/rajguruyash/Mosbius-Co/blob/main/SECURITY_REPORT.md">security notes</a>.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────── the settings interface ───────────────────────── -->
+<section class="horn-mark" id="screens">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>INSIDE THE APP</span>
+      <h2>Connect, install, keep track.</h2>
+      <p>Find a service, switch it on, install skills and see what your agents have been doing.</p>
+    </div>
+    <div class="shots" id="shots"></div>
+  </div>
+</section>
+
+
+<!-- ───────────────────────── download ───────────────────────── -->
+<section class="band-deep horn-mark" id="download">
+  <div class="shell">
+    <div class="section-head">
+      <span class="kicker"><span class="dot"></span>GET IT</span>
+      <h2>Your office is waiting.</h2>
+      <p>Free and open source. Version 1.1.0, the Huddle release, is for macOS on Apple silicon and Windows (64-bit).</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://github.com/rajguruyash/Mosbius-Co/releases/tag/v1.1.0">macOS — Apple silicon</a>
+      <a class="btn btn-primary" href="https://github.com/rajguruyash/Mosbius-Co/releases/tag/v1.1.0.0">Windows — 64-bit</a>
+      <a class="btn" href="releases.html">All releases</a>
+    </div>
+    <p class="fine">Each button opens that release's page on GitHub, where the installer is. Intel Macs and Linux are not part of this release.
+      The Windows installer is new and has not been tried on a real Windows computer yet.
+      You need at least one coding agent installed and signed in. See the
+      <a href="https://github.com/rajguruyash/Mosbius-Co/blob/main/README.md#installation-and-downloads">installation guide</a>
+      or the <a href="releases.html">releases page</a>; earlier releases do not have the Huddle.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    <div class="legal">
+      <p><b style="color:#e2e8f0">Mosbius &amp; Co</b> — a fan-made project, not affiliated with,
+        endorsed by, or connected to the creators, writers or distributors of
+        <i>How I Met Your Mother</i>, or to Twentieth Century Fox. Character names are used
+        affectionately as a parody tribute.</p>
+      <p>Built upon the original Munder Difflin project; credit to its original creators for the
+        foundational work.</p>
+    </div>
+    <div>
+      <p><a href="https://github.com/rajguruyash/Mosbius-Co">Source on GitHub</a></p>
+      <p><a href="releases.html">Releases</a></p>
+      <p><a href="https://github.com/rajguruyash/Mosbius-Co/releases">All releases on GitHub</a></p>
+      <p><a href="https://github.com/rajguruyash/Mosbius-Co/blob/main/INTEGRATIONS.md">Integrations reference</a></p>
+      <p><a href="https://github.com/rajguruyash/Mosbius-Co/blob/main/SKILLS.md">Skills reference</a></p>
+      <p><a href="https://github.com/rajguruyash/Mosbius-Co/blob/main/SECURITY_REPORT.md">Security report</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/cast-manifest.js"></script>
+<script src="js/rooms-manifest.js"></script>
+<script src="js/catalogue.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/props.js"></script>
+<script src="js/dialogue.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/spawn.js"></script>
+<script src="js/locations.js"></script>
+<script src="js/cinema.js"></script>
+<script src="js/integrations.js"></script>
+<script src="js/ecosystem.js"></script>
+<script src="js/huddle.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
