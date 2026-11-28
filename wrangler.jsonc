@@ -1,6 +1,12 @@
 // Cloudflare reads this when it builds a push: publish the files in this folder as the website.
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "mosbius-co-site",
-  "compatibility_date": "2026-11-23",
-  "assets": { "directory": "." }
+  "compatibility_date": "2026-11-19",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "."
+  }
 }
