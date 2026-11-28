@@ -1,0 +1,6 @@
+// Cloudflare reads this when it builds a push: publish the files in this folder as the website.
+{
+  "name": "mosbius-co-site",
+  "compatibility_date": "2026-11-23",
+  "assets": { "directory": "." }
+}
